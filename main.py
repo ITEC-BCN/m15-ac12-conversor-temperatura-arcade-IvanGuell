@@ -1,23 +1,20 @@
-function FhtToCls(Fahrenheit: number): number {
-    
+def FhtToCls(Fahrenheit: number):
+    global Cls
     Cls = Math.round((Fahrenheit - 32) * 5 / 9 * 100) / 100
     return Cls
-}
-
-function ClsToFht(Celsius: number): number {
-    
+def ClsToFht(Celsius: number):
+    global Fht
     Fht = Math.round((Celsius * 9 / 5 + 32) * 100) / 100
     return Fht
-}
-
-let character : Sprite = null
-let Fht2 = 0
-let Cls2 = 0
-let Fht = 0
-let Cls = 0
-let option = -1
-music.play(music.stringPlayable("E B C5 A B G A F ", 220), music.PlaybackMode.LoopingInBackground)
-scene.setBackgroundImage(img`
+character: Sprite = None
+Fht2 = 0
+Cls2 = 0
+Fht = 0
+Cls = 0
+option = -1
+music.play(music.string_playable("E B C5 A B G A F ", 220),
+    music.PlaybackMode.LOOPING_IN_BACKGROUND)
+scene.set_background_image(img("""
     eeeee2222222222222222222222222222222222ee2222ee2222ee2222222eeeee2222222222222222222222222222222222ee22222eeee222ee2eeeee2222222222222222222222222222222222ee222
         222eeeee22222222222222222222222222222eee2222eeee2222ee222222222eeeee22222222222222222222222222222eee2222eeeee222ee22222eeeee22222222222222222222222222222eee2222
         222222eeeeeee222222222222222222222eeee22222eeeeee2222eee2222222222eeeeeee222222222222222222222eeee22222eeee2222ee222222222eeeeeee222222222222222222222eeee22222e
@@ -138,9 +135,10 @@ scene.setBackgroundImage(img`
         222222e2eeeeebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbeeeee2e222222
         222222e2ebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbe2e222222
         222222eeebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbeee222222
-`)
-game.showLongText("Choose what you want to convert.", DialogLayout.Bottom)
-let menuP = miniMenu.createMenu(miniMenu.createMenuItem("Cº to Fº", img`
+"""))
+game.show_long_text("Choose what you want to convert.", DialogLayout.BOTTOM)
+menuP = miniMenu.create_menu(miniMenu.create_menu_item("Cº to Fº",
+        img("""
             . . . . . f f f f f . . . . . . 
                 . . . . f e e e e e f . . . . . 
                 . . . f d d d d d d e f . . . . 
@@ -157,7 +155,9 @@ let menuP = miniMenu.createMenu(miniMenu.createMenuItem("Cº to Fº", img`
                 . f b d f e e f b b f f f e f . 
                 . f d d f f f f d d b f f f f . 
                 . f f f f f f f f f f f f f . .
-        `), miniMenu.createMenuItem("Fº to Cº", img`
+        """)),
+    miniMenu.create_menu_item("Fº to Cº",
+        img("""
             . . . . . . . . . . . . . . . . 
                 . . 4 4 4 . . . . 4 4 4 . . . . 
                 . 4 5 5 5 e . . e 5 5 5 4 . . . 
@@ -172,22 +172,24 @@ let menuP = miniMenu.createMenu(miniMenu.createMenuItem("Cº to Fº", img`
                 . . . f 5 5 5 5 5 5 5 4 5 f . . 
                 . . . . f 5 4 5 f 5 f f f . . . 
                 . . . . . f f f f f f f . . . .
-        `))
-menuP.setDimensions(160, 100)
-menuP.setPosition(80, 60)
-menuP.setTitle("Choose one")
-menuP.onButtonPressed(controller.A, function on_button_pressed(selection: any, selectedIndex: any) {
-    
+        """)))
+menuP.set_dimensions(160, 100)
+menuP.set_position(80, 60)
+menuP.set_title("Choose one")
+
+def on_button_pressed(selection, selectedIndex):
+    global option
     menuP.close()
     option = selectedIndex
-})
-forever(function on_forever() {
-    
-    if (option == 0) {
-        Cls2 = game.askForNumber("Insert Celsius", 10)
+menuP.on_button_pressed(controller.A, on_button_pressed)
+
+def on_forever():
+    global Cls2, Fht2, character
+    if option == 0:
+        Cls2 = game.ask_for_number("Insert Celsius", 10)
         Fht2 = ClsToFht(Cls2)
-        if (Fht2 <= 0) {
-            scene.setBackgroundImage(img`
+        if Fht2 <= 0:
+            scene.set_background_image(img("""
                 8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
                                 8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
                                 8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
@@ -308,10 +310,10 @@ forever(function on_forever() {
                                 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
                                 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
                                 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-            `)
-            scroller.scrollBackgroundWithSpeed(-20, 0)
-        } else {
-            scene.setBackgroundImage(img`
+            """))
+            scroller.scroll_background_with_speed(-20, 0)
+        else:
+            scene.set_background_image(img("""
                 3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
                                 3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
                                 3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
@@ -432,11 +434,9 @@ forever(function on_forever() {
                                 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
                                 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
                                 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-            `)
-            scroller.scrollBackgroundWithSpeed(-20, 0)
-        }
-        
-        character = sprites.create(img`
+            """))
+            scroller.scroll_background_with_speed(-20, 0)
+        character = sprites.create(img("""
                 . . . . . f f f f f . . . . . . 
                             . . . . f e e e e e f . . . . . 
                             . . . f d d d d d d e f . . . . 
@@ -453,15 +453,16 @@ forever(function on_forever() {
                             . f b d f e e f b b f f f e f . 
                             . f d d f f f f d d b f f f f . 
                             . f f f f f f f f f f f f f . .
-            `, SpriteKind.Player)
-        character.setPosition(80, 71)
-        character.sayText("Fahrenheit = " + ("" + ("" + Fht2)) + "ºF")
+            """),
+            SpriteKind.player)
+        character.set_position(80, 71)
+        character.say_text("Fahrenheit = " + ("" + str(Fht2)) + "ºF")
         pause(1500)
-    } else if (option == 1) {
-        Fht2 = game.askForNumber("Insert Fahrenheit", 10)
+    elif option == 1:
+        Fht2 = game.ask_for_number("Insert Fahrenheit", 10)
         Cls2 = FhtToCls(Fht2)
-        if (Cls2 <= 0) {
-            scene.setBackgroundImage(img`
+        if Cls2 <= 0:
+            scene.set_background_image(img("""
                 8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
                                 8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
                                 8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
@@ -582,10 +583,10 @@ forever(function on_forever() {
                                 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
                                 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
                                 1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-            `)
-            scroller.scrollBackgroundWithSpeed(-20, 0)
-        } else {
-            scene.setBackgroundImage(img`
+            """))
+            scroller.scroll_background_with_speed(-20, 0)
+        else:
+            scene.set_background_image(img("""
                 3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
                                 3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
                                 3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
@@ -706,11 +707,9 @@ forever(function on_forever() {
                                 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
                                 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
                                 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-            `)
-            scroller.scrollBackgroundWithSpeed(-20, 0)
-        }
-        
-        character = sprites.create(img`
+            """))
+            scroller.scroll_background_with_speed(-20, 0)
+        character = sprites.create(img("""
                 . . . . . . . . . . . . . . . . 
                             . . 4 4 4 . . . . 4 4 4 . . . . 
                             . 4 5 5 5 e . . e 5 5 5 4 . . . 
@@ -725,10 +724,9 @@ forever(function on_forever() {
                             . . . f 5 5 5 5 5 5 5 4 5 f . . 
                             . . . . f 5 4 5 f 5 f f f . . . 
                             . . . . . f f f f f f f . . . .
-            `, SpriteKind.Player)
-        character.setPosition(80, 71)
-        character.sayText("Celsius = " + ("" + ("" + Cls2)) + "ºC")
+            """),
+            SpriteKind.player)
+        character.set_position(80, 71)
+        character.say_text("Celsius = " + ("" + str(Cls2)) + "ºC")
         pause(1500)
-    }
-    
-})
+forever(on_forever)
