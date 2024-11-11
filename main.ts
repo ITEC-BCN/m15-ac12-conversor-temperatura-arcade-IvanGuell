@@ -458,7 +458,7 @@ forever(function () {
             `, SpriteKind.Player)
         character.setPosition(80, 71)
         character.sayText("Eso son: " + ("" + Fht2) + "ºF")
-        pause(1500)
+        pause(5000)
     } else if (option == 1) {
         Fht2 = game.askForNumber("Introduce cuantos Fahrenheit", 10)
         Cls2 = FhtToCls(Fht2)
@@ -735,6 +735,6 @@ forever(function () {
             `, SpriteKind.Player)
         character.setPosition(80, 71)
         character.sayText("Eso son: " + ("" + Cls2) + "ºC")
-        pause(1500)
+        pause(5000)
     }
 })
