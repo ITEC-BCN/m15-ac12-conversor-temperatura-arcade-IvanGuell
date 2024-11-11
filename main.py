@@ -174,7 +174,7 @@ menuP = miniMenu.create_menu(miniMenu.create_menu_item("Cº to Fº",
                 . . . . . f f f f f f f . . . .
         """)))
 menuP.set_dimensions(160, 100)
-menuP.set_position(80, 60)
+menuP.set_position(80, 85)
 menuP.set_title("Choose one")
 
 def on_button_pressed(selection, selectedIndex):

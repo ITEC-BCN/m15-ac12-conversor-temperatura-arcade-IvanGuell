@@ -174,7 +174,7 @@ let menuP = miniMenu.createMenu(miniMenu.createMenuItem("Cº to Fº", img`
                 . . . . . f f f f f f f . . . .
         `))
 menuP.setDimensions(160, 100)
-menuP.setPosition(80, 60)
+menuP.setPosition(80, 85)
 menuP.setTitle("Choose one")
 menuP.onButtonPressed(controller.A, function on_button_pressed(selection: any, selectedIndex: any) {
     
